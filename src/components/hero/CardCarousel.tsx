@@ -128,21 +128,37 @@ export default function CardCarousel() {
 
   useEffect(() => {
     const el = track.current;
-    if (!el || prefersReducedMotion()) return;
+    if (!el) return;
+    const auto = !prefersReducedMotion();
     let a = el.scrollWidth / 2;
     let speed = a / 50;
     let wrap = gsap.utils.wrap(-a, 0);
+    const setX = gsap.quickSetter(el, "x", "px");
     let x = 0;
+    let vel = 0; // px/s, release inertia
     let dragging = false;
     let hovering = false;
     let dragActive = false;
     let startX = 0;
     let startPos = 0;
+    let lastX = 0;
+    let lastT = 0;
     let pid: number | null = null;
-    const tick = (_t: number, dt: number) => {
-      if (!dragging && !hovering) x -= (dt / 1000) * speed;
+    let suppressClick = false;
+
+    const tick = (_t: number, dtMs: number) => {
+      const dt = Math.min(dtMs, 50) / 1000;
+      if (!dragging) {
+        if (Math.abs(vel) > 2) {
+          x += vel * dt;
+          vel *= Math.exp(-3.2 * dt); // glide out, then auto-scroll resumes
+        } else {
+          vel = 0;
+          if (auto && !hovering) x -= dt * speed;
+        }
+      }
       x = wrap(x);
-      gsap.set(el, { x });
+      setX(x);
     };
     let ticking = false;
     const io = new IntersectionObserver(([e]) => {
@@ -163,26 +179,37 @@ export default function CardCarousel() {
     ro.observe(el);
 
     el.style.cursor = "grab";
-    const enter = () => (hovering = true);
+    const enter = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") hovering = true;
+    };
     const leave = () => (hovering = false);
     const down = (e: PointerEvent) => {
-      if (pid !== null) return;
-      if ((e.target as HTMLElement).closest("button, a, [role='button'], [data-clickable]")) return;
+      if (pid !== null || e.button > 0) return;
+      // Real links/inputs keep their own behaviour; cards (flip buttons) can still be dragged.
+      if ((e.target as HTMLElement).closest("a, input, textarea, select")) return;
       pid = e.pointerId;
       dragActive = true;
       dragging = false;
-      startX = e.clientX;
+      startX = lastX = e.clientX;
+      lastT = e.timeStamp;
       startPos = x;
+      vel = 0;
     };
     const move = (e: PointerEvent) => {
       if (e.pointerId !== pid || !dragActive) return;
       const dx = e.clientX - startX;
       if (!dragging) {
-        if (Math.abs(dx) < 5) return;
+        if (Math.abs(dx) < 6) return;
         dragging = true;
         el.style.cursor = "grabbing";
-        el.setPointerCapture(pid);
+        try {
+          el.setPointerCapture(pid);
+        } catch {}
       }
+      const dtm = Math.max(4, e.timeStamp - lastT);
+      vel += (((e.clientX - lastX) / dtm) * 1000 - vel) * (1 - Math.exp(-dtm / 50));
+      lastX = e.clientX;
+      lastT = e.timeStamp;
       x = startPos + dx;
     };
     const up = (e: PointerEvent) => {
@@ -190,13 +217,34 @@ export default function CardCarousel() {
       try {
         el.releasePointerCapture(pid);
       } catch {}
+      if (dragging) {
+        suppressClick = true; // a drag must not flip the card under the pointer
+        if (e.timeStamp - lastT > 90) vel = 0; // paused before release => no fling
+        vel = gsap.utils.clamp(-4000, 4000, vel);
+      }
       dragging = dragActive = false;
       pid = null;
       el.style.cursor = "grab";
     };
+    const click = (e: MouseEvent) => {
+      if (!suppressClick) return;
+      suppressClick = false;
+      e.preventDefault();
+      e.stopPropagation();
+    };
+    // Trackpad / shift+wheel horizontal scrolling.
+    const wheel = (e: WheelEvent) => {
+      const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.shiftKey ? e.deltaY : 0;
+      if (!dx) return;
+      e.preventDefault();
+      x -= dx;
+      vel = 0;
+    };
     el.addEventListener("pointerenter", enter);
     el.addEventListener("pointerleave", leave);
     el.addEventListener("pointerdown", down);
+    el.addEventListener("click", click, true);
+    el.addEventListener("wheel", wheel, { passive: false });
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
     window.addEventListener("pointercancel", up);
@@ -207,6 +255,8 @@ export default function CardCarousel() {
       el.removeEventListener("pointerenter", enter);
       el.removeEventListener("pointerleave", leave);
       el.removeEventListener("pointerdown", down);
+      el.removeEventListener("click", click, true);
+      el.removeEventListener("wheel", wheel);
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", up);
       window.removeEventListener("pointercancel", up);
