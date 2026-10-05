@@ -437,3 +437,14 @@
 .dim {
   color: rgba(245, 245, 245, 0.25);
 }
+.pillNum {
+  font-weight: 700;
+  color: #ffffff;
+}
+.pillLabel {
+  font-weight: 500;
+  color: rgba(245, 245, 245, 0.62);
+}
+.sub {
+  color: rgba(245, 245, 245, 0.78);
+}

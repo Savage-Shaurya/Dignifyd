@@ -193,10 +193,10 @@ export default function Footer() {
             [ {cure.label} ]
           </span>
           <h2 ref={phrase} data-footer-phrase className={`text-display-xl ${s.phrase}`}>
-            {cure.before}{" "}
+            <span className="grad-silver">{cure.before}</span>{" "}
             <span className={s.phraseAccent}>
-              {cure.accent}
-              <DotBlob />
+              <span className="grad-crimson serif-accent">{cure.accent}</span>
+              <DotBlob accent />
             </span>
           </h2>
         </section>

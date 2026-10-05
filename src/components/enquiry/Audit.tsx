@@ -346,7 +346,7 @@ export default function Audit() {
               [ {audit.label} ]
             </span>
             <h2 ref={title} className={`text-display-l ${s.title}`}>
-              {audit.title}
+              <span className="grad-silver">{audit.titleLead}</span> <span className="grad-crimson serif-accent">{audit.titleAccent}</span>
             </h2>
             <p ref={sub} className={`text-body ${s.sub}`}>
               {audit.sub[0]}
@@ -439,7 +439,7 @@ export default function Audit() {
           {step === "match" && pain && entity && (
             <motion.div key="match" className={s.match} {...stepMotion}>
               <motion.h3 className={`text-display-l ${s.greet}`} {...line(0.2)}>
-                {name.trim().split(" ")[0]}
+                <span className="grad-silver">{name.trim().split(" ")[0]}</span>
                 <DotBlob accent />
               </motion.h3>
               <motion.p className={s.painref} {...line(0.8)}>
@@ -500,7 +500,9 @@ export default function Audit() {
             <motion.div key="ready" className={s.match} {...stepMotion}>
               <motion.span className={s.flash} initial={{ x: "-110%" }} animate={{ x: "110%", transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } }} />
               <motion.h3 className={`text-display-l ${s.greet}`} initial={{ opacity: 0, scale: 0.96, filter: "blur(10px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)", transition: { delay: 0.15, duration: 1.4, ease: [0.16, 1, 0.3, 1] } }}>
-                your enquiry is ready, {name.trim().split(" ")[0]}<DotBlob accent />
+                <span className="grad-silver">your enquiry is ready,</span>{" "}
+                <span className="grad-crimson serif-accent">{name.trim().split(" ")[0]}</span>
+                <DotBlob accent />
               </motion.h3>
               <motion.p className={s.painref} {...line(0.8)}>
                 Send it and {entity.name} will respond at {email}.

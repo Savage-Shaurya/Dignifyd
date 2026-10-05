@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, JetBrains_Mono, Martian_Mono } from "next/font/google";
+import { Geist_Mono, Instrument_Serif, JetBrains_Mono, Martian_Mono } from "next/font/google";
 import "./globals.css";
 
 const display = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", weight: "variable" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", weight: "variable" });
 const martian = Martian_Mono({ subsets: ["latin"], variable: "--font-martian", weight: "variable" });
+const serif = Instrument_Serif({ subsets: ["latin"], variable: "--font-instrument", weight: "400", style: ["normal", "italic"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dignifyd.io"),
@@ -27,7 +28,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable} ${martian.variable}`}>
+    <html lang="en" className={`${display.variable} ${mono.variable} ${martian.variable} ${serif.variable}`}>
       <body>{children}</body>
     </html>
   );

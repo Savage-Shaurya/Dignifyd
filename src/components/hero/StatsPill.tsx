@@ -39,9 +39,11 @@ export default function StatsPill() {
       <LogoMarquee variant="overlay" />
       <div className={s.pillWrap}>
         <div className={s.pill}>
-          {hero.stats.map((t, i) => (
-            <span key={t} className={s.pillGroup}>
-              <span>{t}</span>
+          {hero.stats.map(([n, l], i) => (
+            <span key={l} className={s.pillGroup}>
+              <span>
+                <span className={s.pillNum}>{n}</span> <span className={s.pillLabel}>{l}</span>
+              </span>
               {i < hero.stats.length - 1 && <span className={s.sep}>·</span>}
             </span>
           ))}

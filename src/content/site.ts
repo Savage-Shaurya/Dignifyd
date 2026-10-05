@@ -128,7 +128,14 @@ export const hero = {
   line2: "Dignifyd.",
   body:
     "We build your technology, hire your teams, run your infrastructure, grow your brand and turn your data into decisions. Five specialist companies under one contract, across 35+ countries, 24/5.",
-  stats: ["35+ countries", "1,500+ projects", "120+ specialists"],
+  bodyLead: "We build your technology, hire your teams, run your infrastructure, grow your brand and turn your data into decisions.",
+  bodyStrong: "Five specialist companies under one contract",
+  bodyAccent: "35+ countries, 24/5",
+  stats: [
+    ["35+", "countries"],
+    ["1,500+", "projects"],
+    ["120+", "specialists"],
+  ] as [string, string][],
   rating: { value: "98%", label: "satisfaction" },
 };
 
@@ -170,6 +177,8 @@ export const cards = [
 export const framework = {
   label: "The group",
   title: "Five entities",
+  titleLead: "Five",
+  titleAccent: "entities",
   body:
     "Most enterprises juggle five vendors for this. Dignifyd does it through five specialist companies that share one contract, one governance standard and one delivery backbone, so nothing gets lost between suppliers.",
 };
@@ -190,6 +199,8 @@ export const entityByKey: Record<EntityKey, { name: string; line: string; tags: 
 export const audit = {
   label: "The enquiry",
   title: "What outcome do you need?",
+  titleLead: "What outcome do you",
+  titleAccent: "need?",
   sub: ["A hire, a platform, a programme.", "Tell us, and the right entity leads will respond..."],
   live: { value: "1,500+", label: "projects delivered" },
   examples: ["a hire", "a platform", "a programme", "a mandate across two functions", "data turned into decisions"],

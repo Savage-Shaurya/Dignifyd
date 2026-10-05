@@ -69,10 +69,12 @@ export default function Hero({ enabled }: { enabled: boolean }) {
       <div className={s.content}>
         <div className={s.textBlock}>
           <h1 ref={title} data-hero-title className={`text-display-xl ${s.title}`}>
-            {hero.line1} {hero.line2}
+            <span className="grad-silver">{hero.line1}</span>{" "}
+            <span className="grad-crimson serif-accent">{hero.line2}</span>
           </h1>
           <p ref={sub} data-hero-sub className={`text-body ${s.sub}`}>
-            {hero.body}
+            {hero.bodyLead} <span className="text-strong">{hero.bodyStrong}</span>, across{" "}
+            <span className="text-crimson">{hero.bodyAccent}</span>.
           </p>
         </div>
         <StatsPill />

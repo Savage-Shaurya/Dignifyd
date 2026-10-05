@@ -182,8 +182,8 @@ export default function Method() {
         <div ref={intro} data-method-intro className={s.intro} style={{ opacity: 0 }}>
           <span className={s.introLabel}>[ {framework.label} ]</span>
           <h2 className={`text-display-xl ${s.introTitle}`}>
-            {framework.title}
-            <DotBlob />
+            {framework.titleLead} <span className="grad-ink serif-accent">{framework.titleAccent}</span>
+            <DotBlob accent />
           </h2>
           <p className={`text-body ${s.introLead}`}>{framework.body}</p>
           <p className={`text-label-l ${s.introList}`}>

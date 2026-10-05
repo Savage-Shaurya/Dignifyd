@@ -22,6 +22,7 @@
   --font-display: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
   --font-martian: var(--font-martian), var(--font-mono);
+  --font-serif: var(--font-instrument), "Instrument Serif", Georgia, serif;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -320,4 +321,74 @@ textarea,
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* ------------------------------------------------------------------
+   Expressive type: serif accent + gradient text
+   Gradients are applied to each split word/char too, so GSAP SplitText
+   (inline-block words with filters) never leaves transparent text behind.
+   ------------------------------------------------------------------ */
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-size: 1.08em;
+  line-height: inherit;
+  padding-right: 0.06em; /* italic overhang stays inside the clip box */
+}
+
+@keyframes grad-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .grad-silver,
+  .grad-silver .split-word,
+  .grad-silver .split-char,
+  .grad-crimson,
+  .grad-crimson .split-word,
+  .grad-crimson .split-char,
+  .grad-ink,
+  .grad-ink .split-word,
+  .grad-ink .split-char {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  /* metallic white: never darker than #9c9c9c (7:1 on black) */
+  .grad-silver,
+  .grad-silver .split-word,
+  .grad-silver .split-char {
+    background-image: linear-gradient(180deg, #ffffff 0%, #f2f2f2 48%, #9c9c9c 100%);
+  }
+  /* crimson shimmer: darkest stop #d0103a keeps >= 3:1 for display sizes */
+  .grad-crimson,
+  .grad-crimson .split-word,
+  .grad-crimson .split-char {
+    background-image: linear-gradient(100deg, #ff5c7a 0%, #ee1a43 28%, #ffb3c1 50%, #ee1a43 72%, #d0103a 100%);
+    background-size: 220% 100%;
+    animation: grad-pan 5.5s ease-in-out infinite alternate;
+  }
+  /* for the white section: ink into crimson */
+  .grad-ink,
+  .grad-ink .split-word,
+  .grad-ink .split-char {
+    background-image: linear-gradient(100deg, #171717 0%, #3a0a14 40%, #ee1a43 100%);
+  }
+}
+
+.text-strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+.text-crimson {
+  color: var(--color-accent);
+  font-weight: 600;
 }

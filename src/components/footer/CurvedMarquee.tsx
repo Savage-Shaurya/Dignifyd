@@ -109,7 +109,9 @@ export default function CurvedMarquee() {
   const rep = (i: number) => (
     <tspan key={i}>
       {marquee.head}
-      <tspan fill="var(--color-accent)">{marquee.accent}</tspan>
+      <tspan fill="url(#fm-accent)" style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontWeight: 400, letterSpacing: 0 }}>
+        {marquee.accent}
+      </tspan>
       {marquee.tail}
       {" · "}
     </tspan>
@@ -120,10 +122,17 @@ export default function CurvedMarquee() {
       <svg viewBox="0 165 1400 175" preserveAspectRatio="xMidYMid meet" className={s.marqueeSvg} aria-hidden>
         <defs>
           <path ref={pathEl} id="fm-curve" d="M -50,304 Q 700,410 1450,190" fill="none" />
+          <linearGradient id="fm-accent" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor="#ff5c7a" />
+            <stop offset="0.5" stopColor="#ffb3c1" />
+            <stop offset="1" stopColor="#ee1a43" />
+          </linearGradient>
         </defs>
         <text ref={measure} x="0" y="0" visibility="hidden">
           {marquee.head}
-          <tspan>{marquee.accent}</tspan>
+          <tspan style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontWeight: 400, letterSpacing: 0 }}>
+            {marquee.accent}
+          </tspan>
           {marquee.tail}
           {" · "}
         </text>
