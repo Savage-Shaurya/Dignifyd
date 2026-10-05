@@ -12,7 +12,15 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Plain-JS port of the WebGL globe.
+    "src/components/globe/engine.js",
   ]),
+  {
+    rules: {
+      // Effects here sync with browser-only state (storage, timezone, animation clocks) after mount.
+      "react-hooks/set-state-in-effect": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

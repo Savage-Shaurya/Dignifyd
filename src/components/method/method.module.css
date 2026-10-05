@@ -1,0 +1,231 @@
+.method {
+  position: relative;
+  width: 100%;
+  background-color: var(--method-bg);
+  transition: none;
+}
+
+.rail {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  contain: paint;
+  isolation: isolate;
+}
+
+.particleLayer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+.particles {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------------- intro ---------------- */
+.intro {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32px;
+  text-align: center;
+  will-change: transform;
+}
+.introLabel {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--method-fg);
+}
+.introTitle {
+  margin-top: 20px;
+  color: var(--method-fg);
+}
+.introLead {
+  margin-top: 28px;
+  max-width: 640px;
+  font-weight: 400;
+  color: var(--method-fg);
+}
+.introList {
+  margin-top: 28px;
+  color: var(--method-fg);
+}
+
+/* ---------------- track ---------------- */
+.track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  height: 100vh;
+  width: 350vw;
+  align-items: stretch;
+  will-change: transform;
+}
+.slide {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  width: 70vw;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 8vw;
+  padding-right: 4vw;
+  will-change: transform;
+}
+.watermark {
+  pointer-events: none;
+  position: absolute;
+  left: 6vw;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(360px, 60vh, 720px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--method-fg);
+  opacity: 0.06;
+}
+@media (max-width: 639px) {
+  .watermark {
+    left: 8px;
+    font-size: clamp(110px, 24vh, 200px);
+  }
+}
+.slideBody {
+  position: relative;
+  z-index: 10;
+  max-width: 640px;
+}
+.entity {
+  margin-bottom: 18px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--method-fg);
+  opacity: 0;
+}
+.name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--method-fg);
+  white-space: nowrap;
+}
+.name [data-method-name] {
+  opacity: 0;
+}
+.divider {
+  margin-top: 24px;
+  height: 0.5px;
+  width: 120px;
+  background: var(--method-border);
+}
+.tagline {
+  margin-top: 24px;
+  max-width: 480px;
+  font-weight: 400;
+  color: var(--method-fg);
+  opacity: 0;
+}
+.bullets {
+  margin-top: 32px;
+  display: flex;
+  max-width: 480px;
+  flex-direction: column;
+  gap: 12px;
+}
+.bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--method-fg);
+  will-change: transform;
+  opacity: 0;
+}
+.dash {
+  margin-top: 0.7em;
+  display: inline-block;
+  height: 0.5px;
+  width: 12px;
+  flex-shrink: 0;
+  background: var(--method-fg);
+  opacity: 0.4;
+}
+
+/* reduced motion: vertical stack */
+.method[data-reduced-motion="true"] .track {
+  position: static;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+.method[data-reduced-motion="true"] .rail {
+  height: auto;
+}
+.method[data-reduced-motion="true"] .slide {
+  width: 100%;
+}
+.method[data-reduced-motion="true"] .intro {
+  position: relative;
+  height: 100vh;
+}
+.method[data-reduced-motion="true"] .name [data-method-name],
+.method[data-reduced-motion="true"] .tagline,
+.method[data-reduced-motion="true"] .bullet,
+.method[data-reduced-motion="true"] .entity {
+  opacity: 1;
+}
+
+/* ---------------- tracker ---------------- */
+.tracker {
+  pointer-events: none;
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  z-index: 20;
+  transform: translateX(-50%) translateY(14px);
+  transition: opacity 0.25s ease-out, transform 0.35s var(--ease-out);
+}
+.trackerSvg {
+  display: block;
+  width: 300px;
+  max-width: 64vw;
+}
+.trackerLabels {
+  position: relative;
+  margin-top: 4px;
+  height: 14px;
+  width: 300px;
+  max-width: 64vw;
+}
+.trackerLabel {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  will-change: transform;
+}

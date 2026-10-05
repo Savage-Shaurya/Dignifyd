@@ -1,0 +1,90 @@
+{
+  "how_to_use": "Generate each image at (or above) the listed size, export as WebP (quality 90) and save it to the exact output path inside dignifyd-site/public. The site picks each file up automatically; until a file exists the slot shows its built-in fallback, so nothing breaks.",
+  "global_style": {
+    "palette": "pure black (#0a0a0a) background, off-white (#f5f5f5) forms, a single crimson accent (#ee1a43) used sparingly, no other hues",
+    "look": "premium editorial tech, dark, high contrast, crisp micro-detail, subtle film grain, soft volumetric light, shallow depth of field",
+    "motifs": "dot-matrix / particle point clouds, fine hairline geometry, glass and brushed metal, quiet negative space",
+    "hard_rules": [
+      "no text, letters, numbers, logos or watermarks anywhere in the image",
+      "no people's faces",
+      "sharp focus on the subject, no blur on the main form, no compression artefacts, no pixelation",
+      "subject fully inside the frame with generous margins; nothing important touching or cut by the edges",
+      "keep the right third calmer for the 16:9 tiles (UI may overlap the corners)"
+    ],
+    "negative_prompt": "text, typography, watermark, logo, signature, letters, numbers, faces, people, blurry, lowres, jpeg artifacts, pixelated, cropped subject, cut off, oversaturated, rainbow colours, neon blue, purple, green, cartoon, clipart, busy background"
+  },
+  "images": [
+    {
+      "id": "entity-tech",
+      "output": "public/images/entities/dignifyd-tech.webp",
+      "size": "1600x900",
+      "aspect_ratio": "16:9",
+      "used_in": "Navbar > The Group panel > Dignifyd Tech card",
+      "prompt": "A floating isometric server rack and cloud lattice made of thousands of tiny off-white glowing points on a pure black background, fine hairline connections between nodes, one crimson data pulse travelling through the lattice, centred with wide margins, cinematic soft light, ultra-detailed, 8k render, editorial tech aesthetic"
+    },
+    {
+      "id": "entity-talent-connect",
+      "output": "public/images/entities/talent-connect.webp",
+      "size": "1600x900",
+      "aspect_ratio": "16:9",
+      "used_in": "Navbar > The Group panel > Talent Connect card",
+      "prompt": "Abstract network of five off-white glass spheres connected by thin luminous threads converging on one crimson sphere, representing verified specialists matched to a role, pure black background, dot-matrix particle dust, centred composition with generous negative space, crisp macro detail, premium 3D render"
+    },
+    {
+      "id": "entity-digital",
+      "output": "public/images/entities/dignifyd-digital.webp",
+      "size": "1600x900",
+      "aspect_ratio": "16:9",
+      "used_in": "Navbar > The Group panel > Dignifyd Digital card",
+      "prompt": "A single elegant ribbon of off-white light sweeping through black space and bursting into a fine particle spray, a thin crimson stroke running along its edge, evokes brand and creative momentum, minimal, centred, sharp, high-end studio render, subtle film grain"
+    },
+    {
+      "id": "entity-enterprise-solutions",
+      "output": "public/images/entities/enterprise-solutions.webp",
+      "size": "1600x900",
+      "aspect_ratio": "16:9",
+      "used_in": "Navbar > The Group panel > Enterprise Solutions card",
+      "prompt": "Precise architectural blueprint rendered in 3D: stacked translucent off-white glass platforms joined by hairline columns, like an enterprise architecture diagram, one crimson keystone block in the middle layer, pure black background, isometric view, crisp edges, centred with wide margins, ultra-detailed"
+    },
+    {
+      "id": "entity-data-labs",
+      "output": "public/images/entities/dignifyd-data-labs.webp",
+      "size": "1600x900",
+      "aspect_ratio": "16:9",
+      "used_in": "Navbar > The Group panel > Dignifyd Data Labs card",
+      "prompt": "A dense point-cloud sphere of off-white data particles resolving into a clean decision tree of hairline branches, a single crimson node lit at the end of one branch, pure black background, scientific and calm, centred, ultra-sharp micro detail, premium render"
+    },
+    {
+      "id": "engage-strategic-pilot",
+      "output": "public/images/engage/strategic-pilot.webp",
+      "size": "1200x630",
+      "aspect_ratio": "1200:630",
+      "used_in": "Navbar > Engage panel > Strategic Pilot card",
+      "prompt": "A thin off-white orbit ring with a small crimson marker partway around it, suggesting a 60-day cycle, three tiny glowing points placed along the ring, pure black background with faint dot-grid texture, minimal, centred, sharp, editorial tech render"
+    },
+    {
+      "id": "engage-capability-build",
+      "output": "public/images/engage/capability-build-programme.webp",
+      "size": "1200x630",
+      "aspect_ratio": "1200:630",
+      "used_in": "Navbar > Engage panel > Capability Build Programme card",
+      "prompt": "Three ascending off-white glass blocks on a black plane, connected by a fine crimson line that steps from one to the next (plan, build, operate), soft rim light, pure black background, clean product-shot lighting, centred with margins, ultra-sharp"
+    },
+    {
+      "id": "engage-multi-year-partnership",
+      "output": "public/images/engage/multi-year-partnership.webp",
+      "size": "1200x630",
+      "aspect_ratio": "1200:630",
+      "used_in": "Navbar > Engage panel > Multi-Year Partnership card",
+      "prompt": "Five thin concentric off-white rings in perspective forming a tunnel of light, the innermost ring crimson, fine particles drifting along the rings, pure black background, calm and enduring mood, centred, crisp detail, premium render"
+    },
+    {
+      "id": "og-share",
+      "output": "public/og.jpg",
+      "size": "1200x630",
+      "aspect_ratio": "1200:630",
+      "used_in": "Link previews (Open Graph / social share). Tell me once it exists and I'll wire it into the page metadata.",
+      "prompt": "A dot-matrix globe made of thousands of tiny off-white points on pure black, seen from slightly above, six crimson points glowing at London, Dubai, Delhi, Singapore, Toronto and Chicago, joined by faint white great-circle arcs, the globe placed in the right half with clean empty black space on the left, cinematic, ultra-sharp, no text"
+    }
+  ]
+}
